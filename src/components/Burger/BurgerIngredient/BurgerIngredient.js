@@ -4,8 +4,15 @@ import PropTypes from 'prop-types';
 import classes from './BurgerIngredient.css';
 
 class BurgerIngredient extends Component {
+
+    // shouldComponentUpdate(nextProps, nextState){
+    //     console.log("shouldComponentUpdate: " + JSON.stringify(nextProps) + " " + JSON.stringify(nextState));
+    //     return true;
+    // }
+   
     render () {
         let ingredient = null;
+        console.log('BurgerIngredient rerendered!');
 
         switch (this.props.type) {
             case('bread-bottom'):

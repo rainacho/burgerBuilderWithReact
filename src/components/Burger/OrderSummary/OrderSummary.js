@@ -8,7 +8,7 @@ Life Cycle Hooks에 추가하기 위하여 이를 class component로 변경.
 class OrderSummary extends Component {
     // This could be a functional component, doesn't have to be a class
     componentWillUpdate(){
-        console.log('[OrderSummary] WillUpdate');
+        // console.log('[OrderSummary] WillUpdate');
     }
     
     render(){

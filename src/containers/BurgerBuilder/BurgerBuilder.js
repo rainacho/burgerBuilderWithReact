@@ -32,6 +32,7 @@ class BurgerBuilder extends Component {
         axios.get('https://spring-duality-207521.firebaseio.com/ingredients.json')
             .then(response => {
                 this.setState({ingredients: response.data});
+                console.log(response.data)
             })
             .catch(error => {
                 alert(error);
@@ -42,18 +43,19 @@ class BurgerBuilder extends Component {
     updatePurchaseState(ingredients){
         const sum = Object.keys(ingredients)
             .map(igKey => {
-                return ingredients[igKey]; //[salad, bacon, cheese, meat]
+                return ingredients[igKey]; //
             })
             .reduce((acc, cur) => {
                 return acc + cur;
-            }, 0);
+            }, 0); //
+        
         this.setState({purchasable: sum > 0});  
     }
 
     addIngredientHandler = (type) => {
         const oldCount = this.state.ingredients[type]
         const updatedCount = oldCount + 1;
-        const updatedIngredients ={
+        const updatedIngredients = {
             ...this.state.ingredients
         };
         updatedIngredients[type] = updatedCount;
@@ -81,7 +83,7 @@ class BurgerBuilder extends Component {
         const oldPrice = this.state.totalPrice;
         const newPrice = oldPrice - priceDeduction;
         this.setState({totalPrice: newPrice, ingredients: updatedIngredients});
-        this.updatePurchaseState();
+        this.updatePurchaseState(updatedIngredients);
     }
 
     purchasingHandler = () => {
@@ -93,7 +95,6 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
-        // alert('You Continue!');
         const queryParams = [];
         for(let i in this.state.ingredients){
             queryParams.push(encodeURIComponent(i) + "=" + encodeURIComponent(this.state.ingredients[i]));
@@ -107,6 +108,7 @@ class BurgerBuilder extends Component {
     }
 
     render() {
+        console.log('BurgerBuilder rerendered!');
         const disabledInfo = {
             ...this.state.ingredients
         }
